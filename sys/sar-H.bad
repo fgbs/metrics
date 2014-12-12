@@ -1,0 +1,53 @@
+#!/usr/bin/ksh
+
+timestamp=`date +%s`
+
+OLDIFS=$IFS
+IFS=$(echo '\n\b')
+IND=1
+
+
+for LINE in $(sar -H 1 1 | tail -n 3); do
+    #echo ">> $LINE"
+    if [ $IND -eq 1 ]; then
+        ctlr=$(echo $LINE|awk '{print $2}')
+        util=$(echo $LINE|awk '{print $3}')
+        t_put=$(echo $LINE|awk '{print $4}')
+        io=$(echo $LINE|awk '{print $5}')
+        rs=$(echo $LINE|awk '{print $6}')
+        ws=$(echo $LINE|awk '{print $7}')
+        read=$(echo $LINE|awk '{print $8}')
+        write=$(echo $LINE|awk '{print $9}')
+        avque=$(echo $LINE|awk '{print $10}')
+        avwait=$(echo $LINE|awk '{print $11}')
+        avserv=$(echo $LINE|awk '{print $12}')
+    else
+        ctlr=$(echo $LINE|awk '{print $1}')
+        util=$(echo $LINE|awk '{print $2}')
+        t_put=$(echo $LINE|awk '{print $3}')
+        io=$(echo $LINE|awk '{print $4}')
+        rs=$(echo $LINE|awk '{print $5}')
+        ws=$(echo $LINE|awk '{print $6}')
+        read=$(echo $LINE|awk '{print $7}')
+        write=$(echo $LINE|awk '{print $8}')
+        avque=$(echo $LINE|awk '{print $9}')
+        avwait=$(echo $LINE|awk '{print $10}')
+        avserv=$(echo $LINE|awk '{print $11}')
+    fi
+    IND=$(( IND + 1 ))
+
+    python /opt/metrics/graph.py -m $METRIC.$ctlr.util -v $util -t $timestamp
+    python /opt/metrics/graph.py -m $METRIC.$ctlr.t_put -v $t_put -t $timestamp
+    python /opt/metrics/graph.py -m $METRIC.$ctlr.io -v $io -t $timestamp
+    python /opt/metrics/graph.py -m $METRIC.$ctlr.rs -v $rs -t $timestamp
+    python /opt/metrics/graph.py -m $METRIC.$ctlr.ws -v $ws -t $timestamp
+    python /opt/metrics/graph.py -m $METRIC.$ctlr.read -v $read -t $timestamp
+    python /opt/metrics/graph.py -m $METRIC.$ctlr.write -v $write -t $timestamp
+    python /opt/metrics/graph.py -m $METRIC.$ctlr.avque -v $avque -t $timestamp
+    python /opt/metrics/graph.py -m $METRIC.$ctlr.avwait -v $avwait -t $timestamp
+    python /opt/metrics/graph.py -m $METRIC.$ctlr.avserv -v $avserv -t $timestamp
+done
+
+IFS=$OLDIFS
+
+exit 0
