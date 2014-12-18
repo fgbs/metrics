@@ -1,12 +1,10 @@
 #!/bin/bash
-#set -x
 
-#BASE=/opt/metrics
-BASE=$(pwd)
+BASE=$(dirname $0)
 METRIC=""
 
 cd $BASE
-for F in $(find . -type f -name '*.sh'); do
+for F in $(find $BASE/sys/ -type f -name '*.sh'); do
     name=$(basename $F .sh)
     dir=$(dirname $F)
 
