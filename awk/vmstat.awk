@@ -4,7 +4,7 @@ BEGIN {
 }
 {
    if (NR > 1) {
-      if ($1 == "r") {
+      if ($1 == "r" || $1 == "free") {
          for (x = 1; x <= NF; x++)
             columns[x] = $x
       } else {

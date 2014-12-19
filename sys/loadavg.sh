@@ -17,7 +17,7 @@ done
 data='[{
     "name": "'$(basename $0 .sh)'",
     "columns": ["time", "hostname", '$(echo "\"${COLS[*]}\""|sed 's/ /\", \"/g')'],
-    "points": [['$(date +%s)', "'$(hostname)'", '$(echo ${VALS[*]}|sed 's/ /, /g')']]
+    "points": [['$(date +%s)', "'$(hostname -s)'", '$(echo ${VALS[*]}|sed 's/ /, /g')']]
 }]'
 
 echo $data

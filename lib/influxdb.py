@@ -4,16 +4,12 @@ import json
 import argparse
 
 from influxdb import InfluxDBClient
+from config import Config
 
-DBUSER=os.environ['DBUSER']
-DBPASS=os.environ['DBPASS']
-DBNAME=os.environ['DBNAME']
-DBHOST=os.environ['DBHOST']
-DBPORT=os.environ['DBPORT']
+cfg = Config()
 
-
-def main(host=DBHOST, port=8086, data=[]):
-    client = InfluxDBClient(host, port, USER, PASSWORD, DBNAME)
+def main(host=cfg.influxdb.DBHOST, port=cfg.influxdb.DBPORT, data=[]):
+    client = InfluxDBClient(host, port, cfg.influxdb.DBUSER, cfg.influxdb.DBPASS, cfg.influxdb.DBNAME)
     json_data = json.loads(data)
 
     #Write points
@@ -28,14 +24,14 @@ def parse_args():
         '--host',
         type=str,
         required=False,
-        default='200.10.1.45',
+        default=cfg.influxdb.DBHOST,
         help='hostname influxdb http API')
 
     parser.add_argument(
         '--port',
         type=int,
         required=False,
-        default=8086,
+        default=cfg.influxdb.DBPORT,
         help='port influxdb http API')
 
     parser.add_argument(
@@ -51,4 +47,3 @@ def parse_args():
 if __name__ == '__main__':
     args = parse_args()
     main(host=args.host, port=args.port, data=args.json)
-∫

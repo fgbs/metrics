@@ -1,6 +1,6 @@
 #!/bin/bash
-. metrics.conf
 
+BASE=$(dirname $0)
 
 cd $BASE
 for F in $(find $BASE/sys/ -type f -name '*.sh'); do
