@@ -1,13 +1,15 @@
 
+import os
 import json
 import argparse
-from pprint import pprint
+
 from influxdb import InfluxDBClient
 
-USER = 'root'
-PASSWORD = 'root'
-DBNAME = 'metrics'
-DBHOST = '200.10.1.45'
+DBUSER=os.environ['DBUSER']
+DBPASS=os.environ['DBPASS']
+DBNAME=os.environ['DBNAME']
+DBHOST=os.environ['DBHOST']
+DBPORT=os.environ['DBPORT']
 
 
 def main(host=DBHOST, port=8086, data=[]):
@@ -49,3 +51,4 @@ def parse_args():
 if __name__ == '__main__':
     args = parse_args()
     main(host=args.host, port=args.port, data=args.json)
+∫
