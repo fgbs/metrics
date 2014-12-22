@@ -15,9 +15,9 @@ for M in $(uptime | awk -f $BASE/awk/uptime.awk); do
 done
 
 data='[{
-    "name": "'$(basename $0 .sh)'",
-    "columns": ["time", "hostname", '$(echo "\"${COLS[*]}\""|sed 's/ /\", \"/g')'],
-    "points": [['$(date +%s)', "'$(hostname -s)'", '$(echo ${VALS[*]}|sed 's/ /, /g')']]
+    "name": "'$METRIC'",
+    "columns": ["time", '$(echo "\"${COLS[*]}\""|sed 's/ /\", \"/g')'],
+    "points": [['$(date +%s)', '$(echo ${VALS[*]}|sed 's/ /, /g')']]
 }]'
 
 echo $data

@@ -1,5 +1,5 @@
 
-import os
+
 import json
 import argparse
 
@@ -8,8 +8,14 @@ from config import Config
 
 cfg = Config()
 
+
 def main(host=cfg.influxdb.DBHOST, port=cfg.influxdb.DBPORT, data=[]):
-    client = InfluxDBClient(host, port, cfg.influxdb.DBUSER, cfg.influxdb.DBPASS, cfg.influxdb.DBNAME)
+    client = InfluxDBClient(
+        host, port,
+        cfg.influxdb.DBUSER,
+        cfg.influxdb.DBPASS,
+        cfg.influxdb.DBNAME
+    )
     json_data = json.loads(data)
 
     #Write points

@@ -9,7 +9,7 @@
     gsub(/\,/, ".", array[len])
 }
 END {
-    print "1m;"array[len-2]
-    print "5m;"array[len-1]
-    print "15m;"array[len]
+    print "one;"array[len-2]
+    print "five;"array[len-1]
+    print "fifteen;"array[len]
 }

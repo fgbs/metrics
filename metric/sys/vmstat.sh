@@ -12,7 +12,6 @@ case "$(uname)" in
 		;;
 esac
 
-
 idx=0
 for M in $($VM | awk -f $BASE/awk/vmstat.awk); do
     col=$(echo $M|awk -F';' '{print $1}')
@@ -25,9 +24,9 @@ for M in $($VM | awk -f $BASE/awk/vmstat.awk); do
 done
 
 data='[{
-    "name": "'$(basename $0 .sh)'",
-    "columns": ["time", "hostname", '$(echo "\"${COLS[*]}\""|sed 's/ /\", \"/g')'],
-    "points": [['$(date +%s)', "'$(hostname -s)'", '$(echo ${VALS[*]}|sed 's/ /, /g')']]
+    "name": "'$METRIC'",
+    "columns": ["time", '$(echo "\"${COLS[*]}\""|sed 's/ /\", \"/g')'],
+    "points": [['$(date +%s)', '$(echo ${VALS[*]}|sed 's/ /, /g')']]
 }]'
 
 echo $data
