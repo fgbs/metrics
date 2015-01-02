@@ -3,10 +3,7 @@
 }
 {
     gsub(/\,$/, "", array[len-2])
-    gsub(/\,/, ".", array[len-2])
     gsub(/\,$/, "", array[len-1])
-    gsub(/\,/, ".", array[len-1])
-    gsub(/\,/, ".", array[len])
 }
 END {
     print "one;"array[len-2]
