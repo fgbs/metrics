@@ -15,5 +15,7 @@ BEGIN {
 }
 END {
    for (i = 1; i <= NF; i++)
-      print columns[i]";"values[i]
+      printf (i < NF ? columns[i]";" : columns[i]"\n")
+   for (i = 1; i <= NF; i++)
+      printf (i < NF ? values[i]";" : values[i]"\n")
 }

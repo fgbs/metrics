@@ -6,6 +6,7 @@ simple metrics collector
 
 Using standard *nix tools to mantain dependencies at minimum
 
+Intended to be used in crontab, not has a service
 
 
 dependencies

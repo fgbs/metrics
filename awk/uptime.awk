@@ -6,7 +6,6 @@
     gsub(/\,$/, "", array[len-1])
 }
 END {
-    print "one;"array[len-2]
-    print "five;"array[len-1]
-    print "fifteen;"array[len]
+    print "one;five;fifteen"
+    print array[len-2]";"array[len-1]";"array[len]
 }

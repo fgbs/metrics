@@ -12,15 +12,14 @@ case "$(uname)" in
 		;;
 esac
 
-idx=0
+head=1
 for M in $($VM | awk -f $BASE/awk/vmstat.awk); do
-    col=$(echo $M|awk -F';' '{print $1}')
-    val=$(echo $M|awk -F';' '{print $2}')
-
-    COLS[$idx]=$col
-    VALS[$idx]=$val
-
-    idx=$(( idx + 1 ))
+    if [ $head -eq 1 ]; then
+        COLS=( $(echo $M|sed 's/;/ /g') )
+        head=0
+    else
+        VALS=( $(echo $M|sed 's/;/ /g') )
+    fi
 done
 
 data='[{
