@@ -15,7 +15,7 @@ done
 data='[{
     "name": "'$METRIC'",
     "columns": ["time", '$(echo "\"${COLS[*]}\""|sed 's/ /\", \"/g')'],
-    "points": [['$(date +%s)', '$(echo ${VALS[*]}|sed 's/ /, /g')']]
+    "points": [['$(date +%s)', "all", '$(echo ${VALS[*]:1}|sed 's/ /, /g')']]
 }]'
 
 echo $data

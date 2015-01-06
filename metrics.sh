@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 export LANG=C
 BASE=$(dirname $0)
 
